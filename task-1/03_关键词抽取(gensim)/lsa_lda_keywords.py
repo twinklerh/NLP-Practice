@@ -7,7 +7,7 @@ from gensim.models import LsiModel, LdaModel
 def load_data(path):
     with open(path, 'r', encoding="utf-8") as f:
         sentences = f.read()
-    article = re.split(r'[.。?？!！]', sentences)
+    article = re.split(r'[.。?？!！]', sentences)  # 把整篇文章切分为句子
     article = [s.strip() for s in article if s.strip()]
     return article
 
@@ -50,7 +50,7 @@ def lda_extract(corpus, dictionary):
 def main():
     texts_list = load_data("./article.txt")
     article = tokenize(texts_list)
-    print(article)  # 分词结果，便于调试
+    print(article)
     dictionary = corpora.Dictionary(article)
     corpus = [dictionary.doc2bow(text) for text in article]
     lsa_lsi_extract(corpus, dictionary)
